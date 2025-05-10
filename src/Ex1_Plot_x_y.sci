@@ -1,52 +1,52 @@
 clc;
 clear;
 
-//Thông số tín hiệu
-fm = 10; //tần số tín hiệu gốc (Hz)
-fc = 100; //tần số sóng mang (Hz)
-A = 1; //biên độ tín hiệu gốc
-Ac = 1; //biên độ sóng mang
-m = 0.5; //hệ số điều chế (0<m<1 để tránh méo tín hiệu)
-fs = 1000; //Tần số lấy mẫu
-T = 1; //Thời gian mô phỏng (giây)
-t = 0:1/fs:T; //Trục thời gian
+//Signal parameters
+fm = 10; //original signal frequency (Hz)
+fc = 100; //carrier frequency (Hz)
+A = 1; //amplitude of the original signal
+Ac = 1; //carrier amplitude
+m = 0.5; //modulation index (0 < m < 1 to avoid signal distortion)
+fs = 1000; //sampling frequency
+T = 1; //simulation time (seconds)
+t = 0:1/fs:T; //time axis
 
-//tạo tín hiệu gốc (tín hiệu điều chế)
+//generate original signal (modulating signal)
 x = A*cos(2*%pi*fm*t);
 
-//tạo sóng mang
+//generate carrier wave
 carrier = Ac *cos(2*%pi*fc*t);
 
-//Điều chế AM
+//AM modulation
 y_am = Ac *(1+m*cos(2*%pi*fm*t)).*cos(2*%pi*fc*t);
 
-//Vẽ đồ thị
+//Plot graphs
 subplot(3,1,1);
 plot(t,x);
-title("tín hiệu gốc");
-xlabel("Thời gian (s)");
-ylabel("biên độ");
+title("Original Signal");
+xlabel("Time (s)");
+ylabel("Amplitude");
 
 subplot(3,1,2);
 plot(t,carrier);
-title("sóng mang");
-xlabel("Thời gian (s)");
-ylabel("biên độ");
+title("Carrier Wave");
+xlabel("Time (s)");
+ylabel("Amplitude");
 
 subplot(3,1,3);
 plot(t,y_am);
-title("Tín hiệu AM với 0.5");
-xlabel("Thời gian (s)");
-ylabel("biên độ");
+title("AM Signal with m = 0.5");
+xlabel("Time (s)");
+ylabel("Amplitude");
 
-//Bài 2
+//Part 2
 m_values = [0.3,0.7,1.2];
 figure(); 
 for i=1:length(m_values)
     y_am_varied = Ac*(1+m_values(i)*cos(2*%pi*fm*t)).*cos(2*%pi*fc*t);
     subplot(3,1,i);
     plot(t,y_am_varied);
-    title("Tín hiệu AM với m =" + string(m_values(i)));
-    xlabel("Thời gian (s)");
-    ylabel("Biên độ");
+    title("AM Signal with m = " + string(m_values(i)));
+    xlabel("Time (s)");
+    ylabel("Amplitude");
 end
