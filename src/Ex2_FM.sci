@@ -1,21 +1,21 @@
-am = 1; //biên độ tín hiệu gốc
-fm = 5; //tần số tín hiệu gốc (Hz)
-fc = 50;//tần số sóng mang (Hz)
-ac = .5; //biên độ sóng mang
-m = 2; //hệ số điều chế (0<m<1 để tránh méo tín hiệu)
-fs = 1000; //tần số lấy mẫu
-T = 1; //thời gian mô phỏng (s)
+am = 1; //amplitude of the original signal
+fm = 5; //frequency of the original signal (Hz)
+fc = 50; //carrier frequency (Hz)
+ac = .5; //amplitude of the carrier
+m = 2; //modulation index (0 < m < 1 to avoid signal distortion)
+fs = 1000; //sampling frequency
+T = 1; //simulation time (s)
 
-//Điều chế tín hiệu (tín hiệu âm thanh)
+//Modulate the signal (audio signal)
 Ms = am *sin(2*%pi*fm*t);
 
-//sóng mang
+//carrier wave
 Cs = ac *sin(2*%pi*fc*t);
 
-//điều chế tần số 
+//frequency modulation 
 Ms = ac *sin(2*%pi*fc*t+m*sin(2*%pi*fm*t));
 
-//vẽ đồ thị
+//plot graphs
 figure();
 
 //Modulating Signal
